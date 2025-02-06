@@ -185,6 +185,7 @@ def create_estimator(pipeline):
         scoring="balanced_accuracy",
         n_jobs=-1,
         refit=True,
+        verbose=2,
     )
 
 
@@ -241,6 +242,8 @@ def _run_jobs():
 
     test_confusion_metrics = calculate_confusion("test", y_test, y_test_pred)
     train_confusion_metrics = calculate_confusion("train", y_train, y_train_pred)
+
+    os.makedirs("files/output/", exist_ok=True)
 
     with open("files/output/metrics.json", "w", encoding="utf-8") as file:
         file.write(json.dumps(train_precision_metrics) + "\n")
